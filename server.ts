@@ -4,6 +4,17 @@ import env from "./src/config/env";
 import { logger } from "./src/utils/logger";
 import { errorHandler } from "./src/middlewares/error-handler";
 import morgan from "morgan";
+import cors from "cors";
+
+app.use(cors({
+    origin: "*",
+    methods: "*",
+    allowedHeaders: "*"
+}));
+
+// Handle preflight requests
+app.options(/.*/, cors());
+
 const server = express();
 server.use(morgan("tiny"));
 server.use(express.json());
